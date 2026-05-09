@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detecting Building Defects Using VGG16</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+        /* Cards layout */
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        /* Upload Section Styling */
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .upload-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-section img {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        nav a.active {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Detecting Building Defects Using VGG16</h2>
+        <nav>
+            <a href="{{ url_for('home') }}" class="active">Home</a>
+            <a href="{{ url_for('introduction') }}">Introduction</a>
+            <a href="{{ url_for('upload') }}">Open Web Cam</a>
+        </nav>
+    </header>
+
+    <!-- Cards Section -->
+    <div class="container">
+        <div class="card">
+            <img src="{{ url_for('static', filename='00001.jpg') }}" alt="Cracks">
+            <p><b>Cracks</b> – Stress exceeds strength.</p>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='download2.jpg') }}" alt="Flakes">
+            <p><b>Flakes</b> – Thin layers peeled off.</p>
+        </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Roof">
+            <p><b>Roof Problem</b> – Defects due to poor design.</p>
+        </div>
+    </div>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+        <h3>Upload Files for Defect Detection</h3>
+        <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+            <button type="submit">Upload</button>
+        </form>
+
+        <!-- Client-side preview before upload -->
+        <img id="preview" style="display:none; width:320px; height:auto; margin-top:10px; border:1px solid #ccc; border-radius:5px;">
+
+        {% if result %}
+            <h4>Prediction Result:</h4>
+            <p>{{ result }}</p>
+        {% endif %}
+
+        {% if uploaded_image %}
+            <h4>Uploaded Image:</h4>
+            <img src="{{ url_for('static', filename=uploaded_image) }}" width="320" height="240" alt="Uploaded Image">
+        {% endif %}
+    </section>
+
+    <script>
+        // Show preview immediately after selecting file
+        function previewImage(event) {
+            const image = document.getElementById('preview');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

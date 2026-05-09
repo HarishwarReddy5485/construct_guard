@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Introduction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <h2>Detecting Building Defects Using VGG16</h2>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a class="active" href="{{ url_for('introduction') }}">Introduction</a>
+            <a href="{{ url_for('upload') }}">Open Web Cam</a>
+        </nav>
+    </header>
+
+    <section>
+        <h3>Project Introduction</h3>
+        <p>
+            This project detects cracks, flakes, and roof defects on building surfaces using
+            a VGG16 deep learning model. A Flask web app integrates OpenCV for real-time
+            webcam input and displays live predictions.
+        </p>
+    </section>
+</body>
+</html>

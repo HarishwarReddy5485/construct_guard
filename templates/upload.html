@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detect & Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <h2>Detecting Building Defects Using VGG16</h2>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('introduction') }}">Introduction</a>
+            <a class="active" href="{{ url_for('upload') }}">Webcam</a>
+        </nav>
+    </header>
+
+    <section>
+        <h3>Live Webcam Feed</h3>
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+        <p>Press 'Q' in terminal to stop the camera.</p>
+    </section>
+</body>
+</html>
